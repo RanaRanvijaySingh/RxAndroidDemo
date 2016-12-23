@@ -20,6 +20,12 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        subscription = Observable.timer(3, TimeUnit.SECONDS).subscribe(observer);
+    }
+
     Observer observer = new Observer() {
         @Override
         public void onCompleted() {
@@ -36,12 +42,6 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(new Intent(SplashActivity.this, HomeActivity.class));
         }
     };
-
-    @Override
-    protected void onResume() {
-        subscription = Observable.timer(3, TimeUnit.SECONDS).subscribe(observer);
-        super.onResume();
-    }
 
     @Override
     protected void onPause() {
